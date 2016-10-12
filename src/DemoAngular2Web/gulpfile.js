@@ -5,6 +5,9 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 */
 
 var gulp = require('gulp');
+var gutil = require('gulp-util');
+var merge = require('gulp-merge');
+
 
 gulp.task('default', function () {
     // place code for your default task here
@@ -12,32 +15,74 @@ gulp.task('default', function () {
 
 var paths = {};
 paths.webroot = "wwwroot/";
-paths.npmSrc = "./node_modules/";
+paths.npmSrc = "\./node_modules/";
 paths.npmLibs = paths.webroot + "lib/npmlibs/";
 
 gulp.task("copy-deps:systemjs", function () {
-    return gulp.src(paths.npmSrc + '/systemjs/dist/**/*.*', { base: paths.npmSrc + '/systemjs/dist/' })
+    return gulp.src(paths.npmSrc + '/systemjs/dist/**/*.*', { base: paths.npmSrc + '/systemjs/dist/'})
          .pipe(gulp.dest(paths.npmLibs + '/systemjs/'));
 });
 
-gulp.task("copy-deps:angular2", function () {
-    return gulp.src(paths.npmSrc + '/angular2/bundles/**/*.js', { base: paths.npmSrc + '/angular2/bundles/' })
-         .pipe(gulp.dest(paths.npmLibs + '/angular2/'));
+
+gulp.task("copy-deps:angular", function () {
+
+    var components = ['core','common','compiler','forms','http','platform-browser','platform-browser-dynamic','router','upgrade'];
+
+    var tasks = components.map(function (component) {
+        gutil.log('comp:' + component);
+        return gulp.src(paths.npmSrc + '/@angular/'+component+'/bundles/*.js', { base: paths.npmSrc + '/@angular/'+component+'/bundles/' })
+        .pipe(gulp.dest(paths.npmLibs + '/@angular/'+component+'/'));
+    });   
+
+
+    return merge(tasks);
+
+    gutil.log('comp:' + 'hi');
+
+    //var comp = 'C:/Development\dotnet\demoang\Angular2Demo\src\DemoAngular2Web\node_modules\@angular\upgrade\bundles\upgrade.umd.min.js'.replace(/(.*)\/([^\/]*)\/bundles\/(.*)/i, '$2');
+    //gutil.log('comp:' + comp);
+   
+
+          //    return gulp.src(paths.npmSrc + '/@angular/**/bundles/*.js', { base: paths.npmSrc + '/rxjs/bundles/@angular/' })
+          //.pipe(gulp.dest(function (file) {
+          //    var comp = file.path.replace(/\\/ig, '/').replace(/(.*)\/([^\/]*)\/bundles\/(.*)/ig, '$2');
+          //     gutil.log('comp:' + file.path + '-- ' + comp);
+          //    return paths.npmLibs + '/@angular/' + comp + '/';
+          //}));          
 });
 
-gulp.task("copy-deps:es6-shim", function () {
-    return gulp.src(paths.npmSrc + '/es6-shim/es6-sh*', { base: paths.npmSrc + '/es6-shim/' })
-         .pipe(gulp.dest(paths.npmLibs + '/es6-shim/'));
+//gulp.task("copy-deps:es6-shim", function () {
+//    return gulp.src(paths.npmSrc + '/es6-shim/es6-sh*', { base: paths.npmSrc + '/es6-shim/' })
+//         .pipe(gulp.dest(paths.npmLibs + '/es6-shim/'));
+//});
+//gulp.task("copy-deps:es6-promise", function () {
+//    return gulp.src(paths.npmSrc + '/es6-promise/dist/**/*.*', { base: paths.npmSrc + '/es6-promise/dist/' })
+//         .pipe(gulp.dest(paths.npmLibs + '/es6-promise/'));
+//});
 
-});
-gulp.task("copy-deps:es6-promise", function () {
-    return gulp.src(paths.npmSrc + '/es6-promise/dist/**/*.*', { base: paths.npmSrc + '/es6-promise/dist/' })
-         .pipe(gulp.dest(paths.npmLibs + '/es6-promise/'));
-});
+//gulp.task("copy-deps:rxjs", function () {
+//    return gulp.src(paths.npmSrc + '/rxjs/bundles/*.*', { base: paths.npmSrc + '/rxjs/bundles/' })
+//         .pipe(gulp.dest(paths.npmLibs + '/rxjs/'));
+//});
+
 
 gulp.task("copy-deps:rxjs", function () {
-    return gulp.src(paths.npmSrc + '/rxjs/bundles/*.*', { base: paths.npmSrc + '/rxjs/bundles/' })
+    return gulp.src(paths.npmSrc + '/rxjs/**/*.js', { base: paths.npmSrc + '/rxjs/' })
          .pipe(gulp.dest(paths.npmLibs + '/rxjs/'));
 });
 
-gulp.task("copy-deps", ["copy-deps:rxjs", 'copy-deps:angular2', 'copy-deps:systemjs', 'copy-deps:es6-shim', 'copy-deps:es6-promise']);
+gulp.task("copy-deps:zonejs", function () {
+    return gulp.src(paths.npmSrc + '/zone.js/dist/**/*.js', { base: paths.npmSrc + '/zone.js/dist/' })
+         .pipe(gulp.dest(paths.npmLibs + '/zone.js/'));
+});
+
+
+gulp.task("copy-deps:reflect-metadata", function () {
+    return gulp.src(paths.npmSrc + '/reflect-metadata/temp/*.js', { base: paths.npmSrc + '/reflect-metadata/temp/' })
+         .pipe(gulp.dest(paths.npmLibs + '/reflect-metadata/'));
+});
+
+
+
+// , 'copy-deps:es6-shim', 'copy-deps:es6-promise'
+gulp.task("copy-deps", ["copy-deps:rxjs", 'copy-deps:angular', 'copy-deps:systemjs', 'copy-deps:zonejs', 'copy-deps:reflect-metadata']);

@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "target": "es5",
     "module": "commonjs",
-    "noEmitOnError": true,
-    "noImplicitAny": false,
-    "outDir": "../wwwroot/app/",
-    "removeComments": false,
+    "moduleResolution": "node",
     "sourceMap": true,
-    "target": "es5"
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "outDir": "../wwwroot/app/"
   },
   "exclude": [
     "node_modules"
