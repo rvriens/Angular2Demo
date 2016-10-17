@@ -7,7 +7,10 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 
 import {HomeComponent, AboutUsComponent, ContactUsComponent, PageNotFoundComponent} from './homeComponent';
+
 import {AppComponent} from './app';
+import {AppMenuComponent} from './appMenu';
+
 import {MinimalLogger, LoggerService, DateLoggerService} from './loggerService';
 
 
@@ -28,7 +31,8 @@ import {MinimalLogger, LoggerService, DateLoggerService} from './loggerService';
         AboutUsComponent,
         ContactUsComponent,
         PageNotFoundComponent,
-        AppComponent
+        AppComponent,
+        AppMenuComponent
     ],
     bootstrap: [AppComponent]
 })

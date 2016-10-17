@@ -5,13 +5,19 @@
 import {Component} from '@angular/core';
 import {NgModule} from '@angular/core';
 import {AppService} from './appService';
+
 import {HomeComponent, AboutUsComponent, ContactUsComponent} from './homeComponent';
+
 
 import { RouterModule }   from '@angular/router'
 
 @Component({
     selector: 'my-app',
-    template: '<p><a [routerLink]="[\'aboutus\']">about</a>{{Title}}<router-outlet></router-outlet></p>',
+    template: `
+            <p>
+                <my-menu></my-menu>
+                <router-outlet></router-outlet>
+            </p>`,
     providers: [AppService]
 })
 export class AppComponent {
