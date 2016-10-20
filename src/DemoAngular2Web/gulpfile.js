@@ -37,18 +37,21 @@ gulp.task("copy-deps:angular", function () {
 
     return merge(tasks);
 
-    gutil.log('comp:' + 'hi');
+    gutil.log('comp:' + 'hi');       
+});
 
-    //var comp = 'C:/Development\dotnet\demoang\Angular2Demo\src\DemoAngular2Web\node_modules\@angular\upgrade\bundles\upgrade.umd.min.js'.replace(/(.*)\/([^\/]*)\/bundles\/(.*)/i, '$2');
-    //gutil.log('comp:' + comp);
-   
+gulp.task("copy-deps:react", function () {
 
-          //    return gulp.src(paths.npmSrc + '/@angular/**/bundles/*.js', { base: paths.npmSrc + '/rxjs/bundles/@angular/' })
-          //.pipe(gulp.dest(function (file) {
-          //    var comp = file.path.replace(/\\/ig, '/').replace(/(.*)\/([^\/]*)\/bundles\/(.*)/ig, '$2');
-          //     gutil.log('comp:' + file.path + '-- ' + comp);
-          //    return paths.npmLibs + '/@angular/' + comp + '/';
-          //}));          
+    var task = [
+        gulp.src(paths.npmSrc + '/react/dist/*.js', { base: paths.npmSrc + '/react/dist/' })
+         .pipe(gulp.dest(paths.npmLibs + '/react/')),
+        gulp.src(paths.npmSrc + '/react-dom/dist/*.js', { base: paths.npmSrc + '/react-dom/dist/' })
+         .pipe(gulp.dest(paths.npmLibs + '/react-dom/')),
+    ];
+
+    
+
+    return merge(tasks);
 });
 
 //gulp.task("copy-deps:es6-shim", function () {
@@ -85,4 +88,4 @@ gulp.task("copy-deps:reflect-metadata", function () {
 
 
 // , 'copy-deps:es6-shim', 'copy-deps:es6-promise'
-gulp.task("copy-deps", ["copy-deps:rxjs", 'copy-deps:angular', 'copy-deps:systemjs', 'copy-deps:zonejs', 'copy-deps:reflect-metadata']);
+gulp.task("copy-deps", ["copy-deps:rxjs", 'copy-deps:angular', 'copy-deps:react', 'copy-deps:systemjs', 'copy-deps:zonejs', 'copy-deps:reflect-metadata']);

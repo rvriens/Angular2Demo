@@ -1,54 +1,51 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <base href="/" />
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
-    <title></title>
-</head>
-<body>
+    <head>
+        <meta charset="utf-8" />
+        <base href="/" />
+        <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+        <title></title>
+    </head>
+    <body>
+        <script src="lib/npmlibs/systemjs/system-polyfills.src.js"></script>
+        <script src="lib/npmlibs/systemjs/system.src.js"></script>
+        <script src="lib/jquery/dist/jquery.js"></script>
+        <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="lib/npmlibs/rxjs/bundles/Rx.js"></script>
+        <script src="lib/npmlibs/zone.js/zone.js"></script>
+        <script src="lib/npmlibs/reflect-metadata/Reflect.js"></script>
+        <script src="lib/npmlibs/react/react-with-addons.js"></script>
+        <script src="lib/npmlibs/react-dom/react-dom.js"></script>
 
+        <script>
 
-    <script src="lib/npmlibs/systemjs/system-polyfills.src.js"></script>
-    <script src="lib/npmlibs/systemjs/system.src.js"></script>
-    <script src="lib/jquery/dist/jquery.js"></script>
-    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="lib/npmlibs/rxjs/bundles/Rx.js"></script>
-    <script src="lib/npmlibs/zone.js/zone.js" ></script>
-    <script src="lib/npmlibs/reflect-metadata/Reflect.js"></script>
+            System.config({
+                map: {
+                    'rxjs': 'lib/npmlibs/rxjs',
+                    '@angular/core': 'lib/npmlibs/@angular/core/core.umd.js',
+                    '@angular/compiler': 'lib/npmlibs/@angular/compiler/compiler.umd.js',
+                    '@angular/common': 'lib/npmlibs/@angular/common/common.umd.js',
+                    '@angular/forms': 'lib/npmlibs/@angular/forms/forms.umd.js',
+                    '@angular/http': 'lib/npmlibs/@angular/http/http.umd.js',
+                    '@angular/platform-browser': 'lib/npmlibs/@angular/platform-browser/platform-browser.umd.js',
+                    '@angular/platform-browser-dynamic': 'lib/npmlibs/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js',
+                    '@angular/router': 'lib/npmlibs/@angular/router/router.umd.js',
+                    '@angular/upgrade': 'lib/npmlibs/@angular/upgrade/upgrade.umd.js'
 
-    <script>
+                },
+                packages: {
+                    'app': { defaultExtension: 'js' },
+                    'lib': { defaultExtension: 'js' },
+                    'lib': { defaultExtension: 'js' },
+                }
+            });
+            // System.import('app/boot').catch(function (err) { console.error(err); });
+            System.import('app/boot');
 
-        System.config({
-            map: {
-                'rxjs': 'lib/npmlibs/rxjs',
-                '@angular/core': 'lib/npmlibs/@angular/core/core.umd.js',
-                '@angular/compiler': 'lib/npmlibs/@angular/compiler/compiler.umd.js',
-                '@angular/common': 'lib/npmlibs/@angular/common/common.umd.js',
-                '@angular/forms': 'lib/npmlibs/@angular/forms/forms.umd.js',
-                '@angular/http': 'lib/npmlibs/@angular/http/http.umd.js',
-                '@angular/platform-browser': 'lib/npmlibs/@angular/platform-browser/platform-browser.umd.js',
-                '@angular/platform-browser-dynamic': 'lib/npmlibs/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js',
-                '@angular/router': 'lib/npmlibs/@angular/router/router.umd.js',
-                '@angular/upgrade': 'lib/npmlibs/@angular/upgrade/upgrade.umd.js'
+            //System.import('app/appmodule').then(null, console.error.bind(console));
 
-            },
-            packages: {
-                'app': { defaultExtension: 'js' },
-                'lib': { defaultExtension: 'js' },
-                'lib': { defaultExtension: 'js' },
-            }
-        });
-        // System.import('app/boot').catch(function (err) { console.error(err); });
-        System.import('app/boot');
+        </script>
 
-        //System.import('app/appmodule').then(null, console.error.bind(console));
-
-    </script>
-
-
-    
-    <my-app>Loading...</my-app>
-
-  </body>
+        <my-app>Loading...</my-app>
+    </body>
 </html>

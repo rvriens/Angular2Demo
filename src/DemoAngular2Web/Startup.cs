@@ -49,15 +49,7 @@ namespace DemoAngular2Web
 
             app.UseApplicationInsightsRequestTelemetry();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+           
 
             app.UseApplicationInsightsExceptionTelemetry();
 
@@ -67,11 +59,21 @@ namespace DemoAngular2Web
 
                 if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
                 {
+                    // context.Response.ContentType = 
                     context.Request.Path = "/index.html"; // Put your Angular root page here
                     await next();
                 }
             });
 
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
 
             app.UseStaticFiles();
 
